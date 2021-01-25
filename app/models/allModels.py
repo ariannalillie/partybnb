@@ -61,6 +61,11 @@ class Booking(db.Model):
     users_id = db.Column(db.Integer, ForeignKey('users.id'))
     locations_id = db.Column(db.Integer, ForeignKey('locations.id'))
     startDate = db.Column(db.Date)
+    endDate = db.Column(db.Date)
+    numGuests = db.Column(db.Integer)
+    totalPrice = db.Column(db.Integer)
+    additionalReq = db.Column(db.String)
+    
 
     user = relationship("User", back_populates="bookings")
     locations = relationship("Location", back_populates="bookings")
