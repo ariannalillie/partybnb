@@ -1,21 +1,42 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import Column, ForeignKey
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String)
     lastName = db.Column(db.String)
     username = db.Column(db.String)
     email = db.Column(db.String(255), nullable=False)
-    hashedPassword = db.Column(db.String(255),  nullable=False)
+    hashed_password = db.Column(db.String(255), nullable = False)
     bookings = relationship("Booking", back_populates="users")
     locations = relationship("Location", back_populates="users")
     photos = relationship("Photo", back_populates="users")
+
+    @property
+    def password(self):
+        return self.hashed_password
+
+    @password.setter
+    def password(self, password):
+        self.hashed_password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email
+        }
+
 
 class Location(db.Model):
     __tablename__='locations'
