@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Search.css';
-import Location from "../../../../app/models/";
+import search from "../../media/search.svg"
+// import Location from "../../../../app/models/";
 
 
 
@@ -21,11 +22,11 @@ const Search = () => {
 
   };
 
-  useEffect(async () => {
-    const res = await fetch(`http://localhost:5000/api/location`)
-    const data = await res.json();
-    setWineries(data)
-  }, []);
+  // useEffect(async () => {
+  //   const res = await fetch(`http://localhost:5000/api/location`)
+  //   const data = await res.json();
+  //   // setWineries(data)
+  // }, []);
 
   return (
     <div className="location">
@@ -57,7 +58,7 @@ const Search = () => {
             value={numGuests}
             onChange={(e) => setNumGuests(e.target.value)}
           ></input>
-          <button className="search-button"></button>
+          <button className="search-button"><img src={search} alt="Logo" className="search"/></button>
         </div>
       </form>
     </div>

@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
+import Home from "./components/Home";
 import { authenticate } from "./services/auth";
 import Search from "./components/Search"
 
@@ -30,7 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} />
-      <Search />
+      <Home/>
 
       <Switch>
         <Route path="/login" exact={true}>

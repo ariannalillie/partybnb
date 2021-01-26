@@ -1,0 +1,12 @@
+<svg id="Component_1_1" data-name="Component 1 – 1" xmlns="http://www.w3.org/2000/svg" width="246" height="109" viewBox="0 0 246 109">
+  <text id="partybnb" transform="translate(75 100)" fill="#fff" font-size="40" font-family="HelveticaNeue-Bold, Helvetica Neue" font-weight="700"><tspan x="0" y="0">partybnb</tspan></text>
+  <g id="Untitled_copy_3" data-name="Untitled copy 3">
+    <path id="ee-background" d="M0,0H72V99.374H0Z" fill="rgba(255,255,255,0)"/>
+    <g id="Layer_5" transform="translate(2.365 42.633)">
+      <g id="Group_3" data-name="Group 3" transform="translate(0)">
+        <path id="Path_12" data-name="Path 12" d="M42.254,210.785v1.742H45.41v55h9.4V261.04h0c0-3.565,2.6-6.459,5.807-6.459h0c3.2,0,5.807,2.895,5.807,6.459h0v6.486h9.4v-55h3.156v-1.742Zm13.975,36.585H51.844v-4.878h4.385Zm0-9.783H51.844V232.71h4.385Zm0-9.756H51.844v-4.878h4.385Zm13.156,19.539H65v-4.878h4.385Zm0-9.783H65V232.71h4.385Zm0-9.756H65v-4.878h4.385Z" transform="translate(-42.254 -210.785)" fill="#fff"/>
+        <path id="Path_13" data-name="Path 13" d="M90.46,240.269v43.777h27.027V240.269Zm11.351,37.651h-6.3v-6.3h6.3Zm0-12.6h-6.3v-6.3h6.3Zm0-12.631h-6.3v-6.3h6.3Zm10.624,25.228h-6.3v-6.3h6.3Zm0-12.6h-6.3v-6.3h6.3Zm0-12.631h-6.3v-6.3h6.3Z" transform="translate(-58.273 -227.305)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>
