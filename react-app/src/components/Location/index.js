@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-// import { useSelector, useDispatch } from 'react-redux';
-// import { getLocations } from "../../store/locations";
+import Search from "../Search";
+import { useSelector, useDispatch } from 'react-redux';
+import { getLocations } from "../../store/locations";
 
 const Location = () => {
+    const dispatch = useDispatch();
+    const locationlist = useSelector(state => state.locations.locationlist);
     const [locations, setLocations] = useState([])
-
     useEffect(() => {
         async function fetchData() {
             const response = await fetch('http://localhost:5000/api/location');
@@ -14,10 +16,15 @@ const Location = () => {
             setLocations(locations);
         }
         fetchData();
+
+        // dispatch(getLocations())
       }, []);
+
+      console.log('LOCATIONLIST', locationlist)
 
     return (
         <div className='location'>
+                <Search />
                 {locations.map(location =>
                 <>
                  <h1><Link to={`/locations/${location.id}`}>{location.title}</Link></h1>

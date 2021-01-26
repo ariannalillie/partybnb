@@ -32,7 +32,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} />
-      <Search />
+
 
       <Switch>
         <Route path="/login" exact={true}>
@@ -48,7 +48,7 @@ function App() {
           />
         </Route>
         <Route path="/locations" exact={true}>
-          <Location />
+            <Location />
         </Route>
         <Route path="/locations/:id" exact={true}>
           <Listing />

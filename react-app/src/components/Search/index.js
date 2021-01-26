@@ -12,7 +12,7 @@ const fakeData = {
   bookingPrice: "500",
 };
 const Search = () => {
-  const [location, setLocation] = useState("")
+  const [locations, setLocations] = useState("")
   const [queryLocation, setQueryLocation] = useState("")
   const [checkInDate, setCheckInDate] = useState();
   const [checkOutDate, setCheckOutDate] = useState();
@@ -22,11 +22,12 @@ const Search = () => {
 
   };
 
-  // useEffect(async () => {
-  //   const res = await fetch(`http://localhost:5000/api/location`)
-  //   const data = await res.json();
-  //   setLocation(data)
-  // }, []);
+  useEffect(async () => {
+    const res = await fetch(`http://localhost:5000/api/location`)
+    const data = await res.json();
+    console.log('DATA', data)
+    setLocations(data)
+  }, []);
 
   return (
     <div className="location">

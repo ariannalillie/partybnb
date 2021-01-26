@@ -12,16 +12,16 @@ const loadSingleLocation = location => ({
 })
 
 export const getLocations = () => async dispatch => {
-    const response = await fetch(`/api/locations`);
+    const response = await fetch(`/api/location`);
 
     if (response.ok) {
-        const locations = response.json();
+        const locations = await response.json();
         dispatch(loadAllLocations(locations));
     }
   };
 
   export const getSingleLocation = (id) => async dispatch => {
-      const response = await fetch(`/api/locations/${id}`)
+      const response = await fetch(`/api/location/${id}`)
 
       if (response.ok) {
           const singleLocation = response.json();
@@ -36,7 +36,17 @@ export const getLocations = () => async dispatch => {
   const locationReducer= (state = initialState, action) => {
     switch (action.type) {
       case LOAD_LOCATIONS: {
-
-        };
+          console.log('LOCATIONLIST LOCATIONS', action.locationlist.locations)
+            const allLocations = [...action.locationlist.locations]
+            return {
+              ...allLocations,
+              ...state,
+              location: action.location,
+            };
+        }
+        default:
+          return state;
       }
     }
+
+    export default locationReducer;
