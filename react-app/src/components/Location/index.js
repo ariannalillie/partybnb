@@ -9,23 +9,27 @@ const Location = () => {
     const locationlist = useSelector(state => state.locations.locationlist);
     const [locations, setLocations] = useState([])
     useEffect(() => {
-        async function fetchData() {
-            const response = await fetch('http://localhost:5000/api/location');
-            console.log(response);
-            const { locations } = await response.json();
-            setLocations(locations);
-        }
-        fetchData();
+        // async function fetchData() {
+        //     const response = await fetch('http://localhost:5000/api/location');
+        //     console.log(response);
+        //     const { locations } = await response.json();
+        //     setLocations(locations);
+        // }
+        // fetchData();
 
-        // dispatch(getLocations())
-      }, []);
+        dispatch(getLocations())
+      }, [dispatch]);
 
       console.log('LOCATIONLIST', locationlist)
+
+      if (!locationlist.locations) {
+          return null;
+      }
 
     return (
         <div className='location'>
                 <Search />
-                {locations.map(location =>
+                {locationlist.locations.map(location =>
                 <>
                  <h1><Link to={`/locations/${location.id}`}>{location.title}</Link></h1>
                  <div>

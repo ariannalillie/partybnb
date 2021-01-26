@@ -41,7 +41,7 @@ export const getLocations = () => async dispatch => {
             return {
               ...allLocations,
               ...state,
-              location: action.location,
+              locationlist: action.locationlist,
             };
         }
         default:
