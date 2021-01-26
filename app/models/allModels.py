@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship
+# from sqlalchemy.orm import relationship
 from sqlalchemy.schema import Column, ForeignKey
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -15,9 +15,9 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String)
     email = db.Column(db.String(255), nullable=False)
     hashed_password = db.Column(db.String(255), nullable = False)
-    bookings = relationship("Booking", back_populates="users")
-    locations = relationship("Location", back_populates="users")
-    photos = relationship("Photo", back_populates="users")
+    bookings = db.relationship("Booking", back_populates="user")
+    locations = db.relationship("Location", back_populates="user")
+    photos = db.relationship("Photo", back_populates="user")
 
     @property
     def password(self):
@@ -55,10 +55,10 @@ class Location(db.Model):
     state = db.Column(db.String)
     zipcode = db.Column(db.String)
 
-    users = relationship("User", back_populates="locations")
-    bookings = relationship("Booking", back_populates="locations")
-    reviews = relationship("Review", back_populates="locations")
-    photos = relationship("Photo", back_populates="locations")
+    user = db.relationship("User", back_populates="locations")
+    bookings = db.relationship("Booking", back_populates="locations")
+    reviews = db.relationship("Review", back_populates="locations")
+    photos = db.relationship("Photo", back_populates="locations")
 
     def to_dict(self):
         return {
@@ -88,8 +88,8 @@ class Booking(db.Model):
     additionalReq = db.Column(db.String)
 
 
-    users = relationship("User", back_populates="bookings")
-    locations = relationship("Location", back_populates="bookings")
+    user = db.relationship("User", back_populates="bookings")
+    locations = db.relationship("Location", back_populates="bookings")
 
 class Review(db.Model):
     __tablename__ ='reviews'
@@ -98,7 +98,7 @@ class Review(db.Model):
     stars = db.Column(db.Integer)
     review = db.Column(db.String)
 
-    locations = relationship("Location", back_populates="reviews")
+    locations = db.relationship("Location", back_populates="reviews")
 
 class Photo(db.Model):
     __tablename__ = 'photos'
@@ -108,5 +108,5 @@ class Photo(db.Model):
     photoUrl = db.Column(db.String)
 
 
-    users = relationship("User", back_populates="photos")
-    locations = relationship("Location", back_populates="photos")
+    users = db.relationship("User", back_populates="photos")
+    locations = db.relationship("Location", back_populates="photos")
