@@ -60,6 +60,12 @@ class Location(db.Model):
     reviews = relationship("Review", back_populates="locations")
     photos = relationship("Photo", back_populates="locations")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "latitude": self.latitude
+        }
+
 class Booking(db.Model):
     __tablename__ = 'bookings'
     id = db.Column(db.Integer, primary_key = True)
@@ -70,7 +76,7 @@ class Booking(db.Model):
     numGuests = db.Column(db.Integer)
     totalPrice = db.Column(db.Integer)
     additionalReq = db.Column(db.String)
-    
+
 
     user = relationship("User", back_populates="bookings")
     locations = relationship("Location", back_populates="bookings")
@@ -90,7 +96,7 @@ class Photo(db.Model):
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     locations_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
     photoUrl = db.Column(db.String)
- 
+
 
     user = relationship("User", back_populates="photos")
     locations = relationship("Location", back_populates="photos")
