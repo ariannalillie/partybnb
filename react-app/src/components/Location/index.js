@@ -1,12 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
 // import { getLocations } from "../../store/locations";
 
 const Location = () => {
+    const [locations, setLocations] = useState([])
 
-    // const { location } = useSelector(state => {
-    //     return state.selectedLocation
+    // const { locations } = useSelector(state => {
+    //     return state.locationlist
     // })
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('http://localhost:5000/api/location');
+            console.log(response);
+            const { locations } = await response.json();
+            setLocations(locations);
+        }
+        fetchData();
+      }, []);
 
     // const dispatch = useDispatch();
 
@@ -18,47 +29,14 @@ const Location = () => {
     //         dispatch(getLocations());
     //   }, [dispatch]);
 
-    const locations = [{
-        title: 'Wrigley Field',
-        description: 'Large stadium in Chicago',
-        venueType: 'Stadium',
-        amenities: 'Lots of seats, hot dog stand',
-        maxGuests: 50000,
-        bookingPrice: 20000,
-        address: '1060 W Addison St',
-        city: 'Chicago',
-        state: 'Illinois',
-        zipcode: '60613'
-    },
-    {
-        title: 'Yankee Stadium',
-        description: 'Large stadium in New York',
-        venueType: 'Stadium',
-        amenities: 'Lots of seats, pizza stand',
-        maxGuests: 70000,
-        bookingPrice: 30000,
-        address: '1060 W Addison St',
-        city: 'Chicago',
-        state: 'Illinois',
-        zipcode: '60613'
-    },
-    {
-        title: 'Wrigley Field',
-        description: 'Large stadium in Chicago',
-        venueType: 'Stadium',
-        amenities: 'Lots of seats, hot dog stand',
-        maxGuests: 50000,
-        bookingPrice: 20000,
-        address: '1060 W Addison St',
-        city: 'Chicago',
-        state: 'Illinois',
-        zipcode: '60613'
-    }]
+    console.log(locations)
+
+    // const { deconstructedLocations } = locations;
 
     return (
         <div className='location'>
-                {locations.map((location) =>
-                <div>
+                {locations.map(location =>
+                <>
                  <h1>{location.title}</h1>
                  <div>
                     <p>Venue Type: {location.venueType}</p>
@@ -68,7 +46,7 @@ const Location = () => {
                     <p>Booking Price: {location.bookingPrice}</p>
                     <p>Address: {location.address}, {location.city}, {location.state} {location.zipcode}</p>
                 </div>
-             </div>
+                </>
              )}
         </div>
     )

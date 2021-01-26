@@ -63,7 +63,17 @@ class Location(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "latitude": self.latitude
+            "latitude": self.latitude,
+            "venueType": self.venueType,
+            "description": self.description,
+            "title": self.title,
+            "amenities": self.amenities,
+            "maxGuests": self.maxGuests,
+            "bookingPrice": self.bookingPrice,
+            "address": self.address,
+            "city": self.city,
+            "state": self.state,
+            "zipcode": self.zipcode,
         }
 
 class Booking(db.Model):

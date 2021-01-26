@@ -9,4 +9,5 @@ location_routes = Blueprint('location', __name__)
 # @login_required
 def locations():
     locations = Location.query.all()
+    print(locations)
     return {"locations": [location.to_dict() for location in locations]}
