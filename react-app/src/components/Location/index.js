@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 // import { useSelector, useDispatch } from 'react-redux';
 // import { getLocations } from "../../store/locations";
 
 const Location = () => {
     const [locations, setLocations] = useState([])
-
-    // const { locations } = useSelector(state => {
-    //     return state.locationlist
-    // })
 
     useEffect(() => {
         async function fetchData() {
@@ -19,25 +16,11 @@ const Location = () => {
         fetchData();
       }, []);
 
-    // const dispatch = useDispatch();
-
-    // const { location } = useSelector(state => {
-    //     return state.locationlist
-    // });
-
-    // useEffect(() => {
-    //         dispatch(getLocations());
-    //   }, [dispatch]);
-
-    console.log(locations)
-
-    // const { deconstructedLocations } = locations;
-
     return (
         <div className='location'>
                 {locations.map(location =>
                 <>
-                 <h1>{location.title}</h1>
+                 <h1><Link to={`/locations/${location.id}`}>{location.title}</Link></h1>
                  <div>
                     <p>Venue Type: {location.venueType}</p>
                     <p>Max Guests: {location.maxGuests}</p>

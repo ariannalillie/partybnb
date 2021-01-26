@@ -11,3 +11,8 @@ def locations():
     locations = Location.query.all()
     print(locations)
     return {"locations": [location.to_dict() for location in locations]}
+
+@location_routes.route('/<id>')
+def individualListing(id):
+    listing = Location.query.get(id)
+    return {"listing": listing.to_dict() }
