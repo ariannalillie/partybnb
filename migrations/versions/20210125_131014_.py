@@ -22,7 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('users_OwnerId', sa.Integer(), nullable=True),
     sa.Column('latitude', sa.Integer(), nullable=True),
-    sa.Column('longitute', sa.Integer(), nullable=True),
+    sa.Column('longitude', sa.Integer(), nullable=True),
     sa.Column('venueType', sa.String(length=255), nullable=True),
     sa.Column('title', sa.String(length=255), nullable=True),
     sa.Column('description', sa.String(), nullable=True),

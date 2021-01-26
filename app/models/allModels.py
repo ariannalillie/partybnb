@@ -43,7 +43,7 @@ class Location(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     users_OwnerId = db.Column(db.Integer, ForeignKey('users.id'))
     latitude = db.Column(db.Integer)
-    longitute = db.Column(db.Integer)
+    longitude = db.Column(db.Integer)
     venueType = db.Column(db.String(255))
     title = db.Column(db.String(255))
     description = db.Column(db.String)
@@ -55,7 +55,7 @@ class Location(db.Model):
     state = db.Column(db.String)
     zipcode = db.Column(db.String)
 
-    user = relationship("User", back_populates="locations")
+    users = relationship("User", back_populates="locations")
     bookings = relationship("Booking", back_populates="locations")
     reviews = relationship("Review", back_populates="locations")
     photos = relationship("Photo", back_populates="locations")
@@ -78,7 +78,7 @@ class Booking(db.Model):
     additionalReq = db.Column(db.String)
 
 
-    user = relationship("User", back_populates="bookings")
+    users = relationship("User", back_populates="bookings")
     locations = relationship("Location", back_populates="bookings")
 
 class Review(db.Model):
@@ -98,5 +98,5 @@ class Photo(db.Model):
     photoUrl = db.Column(db.String)
 
 
-    user = relationship("User", back_populates="photos")
+    users = relationship("User", back_populates="photos")
     locations = relationship("Location", back_populates="photos")
