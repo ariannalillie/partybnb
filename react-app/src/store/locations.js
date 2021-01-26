@@ -9,7 +9,7 @@ const loadAllLocations = locationlist => ({
 const loadSingleLocation = location => ({
     type: LOAD_SINGLE_LOCATION,
     location
-})
+});
 
 export const getLocations = () => async dispatch => {
     const response = await fetch(`/api/location`);
@@ -21,27 +21,37 @@ export const getLocations = () => async dispatch => {
   };
 
   export const getSingleLocation = (id) => async dispatch => {
-      const response = await fetch(`/api/location/${id}`)
+    const response = await fetch(`/api/location/${id}`);
+    if (response.ok) {
+        const locations = await response.json();
+        dispatch(loadSingleLocation(locations));
+    }
+  }
 
-      if (response.ok) {
-          const singleLocation = response.json();
-          dispatch(loadSingleLocation(singleLocation));
-      }
+  export const searchLocations = () => async dispatch => {
+      const response = await fetch(`/api/location`, {
+        method: 'POST',
+        body: JSON.stringify({}),
+      });
   }
 
   const initialState = {
-    locationlist: []
+    locationlist: [],
+    location: {}
   };
 
   const locationReducer= (state = initialState, action) => {
     switch (action.type) {
       case LOAD_LOCATIONS: {
-          console.log('LOCATIONLIST LOCATIONS', action.locationlist.locations)
-            const allLocations = [...action.locationlist.locations]
             return {
-              ...allLocations,
               ...state,
-              locationlist: action.locationlist,
+              locationlist: action.locationlist.locations,
+            };
+        }
+        case LOAD_SINGLE_LOCATION: {
+            return {
+              ...state,
+              location: action.location.listing,
             };
         }
         default:

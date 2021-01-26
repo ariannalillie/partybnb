@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getSingleLocation } from "../../store/locations";
 
 const Listing = () => {
-    const [listing, setListing] = useState([])
     const { id } = useParams();
+    const dispatch = useDispatch();
+    const listing = useSelector(state => state.locations.location);
 
     useEffect(() => {
-        async function fetchData() {
-            const response = await fetch(`http://localhost:5000/api/location/${id}`);
-            console.log(response);
-            const { listing } = await response.json();
-            setListing(listing);
-        }
-        fetchData();
-      }, []);
+        dispatch(getSingleLocation(id))
+      }, [dispatch]);
+
+      if (!listing) {
+          return null;
+      }
 
     return (
         <div className='location'>
