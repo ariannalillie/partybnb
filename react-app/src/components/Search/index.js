@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Search.css';
-import Location from "../../../../app/models/";
+// import Location from "../../../../app/models/";
 
 
 
@@ -24,7 +24,7 @@ const Search = () => {
   useEffect(async () => {
     const res = await fetch(`http://localhost:5000/api/location`)
     const data = await res.json();
-    setWineries(data)
+    // setWineries(data)
   }, []);
 
   return (
