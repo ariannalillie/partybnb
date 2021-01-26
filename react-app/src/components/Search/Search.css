@@ -1,0 +1,32 @@
+.search-bar {
+    border: none;
+    padding: 10px;
+    margin-left: 3px;
+}
+
+.search-bar-container {
+    width: fit-content;
+    /* padding: 10px; */
+    border-radius: 30px;
+    border: 2px solid black;
+}
+
+.search-bar:hover {
+    border: solid 1px #F7F7F7;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #F7F7F7;
+    margin-left: 2px;
+}
+
+.search-button {
+    height: 25px;
+    width: 25px;
+    position: relative;
+    top: 5px;
+    right: 10px;
+    border-radius: 50%;
+    background-color: #F76767;
+    opacity: 74%;
+}
+
