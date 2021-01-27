@@ -51,6 +51,9 @@ function App() {
         <Route path="/locations" exact={true}>
             <Location />
         </Route>
+        <Route path="/createlisting" exact={true} authenticated={authenticated}>
+            <CreateListing />
+        </Route>
         <Route path="/locations/:id" exact={true}>
           <Listing />
         </Route>

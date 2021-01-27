@@ -53,11 +53,19 @@ const Search = () => {
     // console.log("just work...     ", searchLat, searchLng);
   };
 
+
+  useEffect(async () => {
+    const res = await fetch(`http://localhost:5000/api/location`)
+    const data = await res.json();
+    setLocations(data)
+  }, []);
+
   // useEffect(async () => {
   //   const res = await fetch(`http://localhost:5000/api/location`)
   //   const data = await res.json();
   //   setLocations(data)
   // }, []);
+
 
   return (
     <div className="location">
