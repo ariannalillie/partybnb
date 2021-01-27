@@ -17,6 +17,7 @@ const Location = () => {
 
     return (
         <div className='location'>
+                <Search />
                 {locationlist.map(location =>
                 <>
                  <h1><Link to={`/locations/${location.id}`}>{location.title}</Link></h1>
