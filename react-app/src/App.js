@@ -8,7 +8,8 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import Home from "./components/Home";
 import { authenticate } from "./services/auth";
-import Search from "./components/Search"
+import Search from "./components/Search";
+import SimpleMap from "./components/SimpleMap";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -32,6 +33,7 @@ function App() {
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} />
       <Home/>
+      < SimpleMap/>
 
       <Switch>
         <Route path="/login" exact={true}>

@@ -19,7 +19,8 @@ function Home() {
                     <img src={svg} alt="Logo" className='party-svg' />
                 </div>
             </div>
-            <div className="footer"></div>
+            <div className="footer">
+            </div>
 
 
 
