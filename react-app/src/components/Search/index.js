@@ -17,9 +17,28 @@ const Search = () => {
   const [checkInDate, setCheckInDate] = useState();
   const [checkOutDate, setCheckOutDate] = useState();
   const [numGuests, setNumGuests] = useState(1)
+  
+  
   const submitForm = async (e) => {
     e.preventDefalt();
+    let spaceRemover = queryLocation.split(" ").join("%20")
 
+    const res = await fetch(
+      `https://google-maps-geocoding.p.rapidapi.com/geocode/json?address=${spaceRemover}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-key":
+            "20dde32ademsha97b6dc9dd8189bp1973e4jsnbc1294ead8c1",
+          "x-rapidapi-host": "google-maps-geocoding.p.rapidapi.com",
+        },
+      }
+    );
+    let searchLat = await res.results[0].geometry.location.lat
+    let searchLng = await res.results[0].geometry.location.lng
+    // let searchbuffer = 0.08 // 69mi/1deg 
+    const locationsNearSearchArea = await fetch(`http://localhost:5000/api/location/${searchLat}/${searchLng}`)
+    console.log(locationsNearSearchArea)
   };
 
   useEffect(async () => {
