@@ -1,15 +1,14 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required
-from app.models import Location
+from app.models import db, Location, User
+from flask_login import current_user
 
 location_routes = Blueprint('location', __name__)
 
 
 @location_routes.route('/')
-# @login_required
 def locations():
     locations = Location.query.all()
-    print(locations)
     return {"locations": [location.to_dict() for location in locations]}
 
 
@@ -30,4 +29,17 @@ def closeProximity(lat, lng):
 @location_routes.route('/<id>')
 def individualListing(id):
     listing = Location.query.get(id)
+
     return {"listing": listing.to_dict() }
+
+@location_routes.route('/createlisting', methods=["POST"])
+@login_required
+def addListing():
+    form_data = request.get_json(force=True)
+    print('FORM DATA', form_data)
+    print('USER ID', current_user.id)
+    new_listing = Location(users_OwnerId=current_user.id,title=form_data["title"],venueType=form_data["venueType"], description=form_data["description"], amenities=form_data["amenities"], maxGuests=form_data["maxGuests"], bookingPrice=form_data["bookingPrice"], address=form_data["address"], city=form_data["city"], state=form_data["state"], zipcode=form_data["zipcode"])
+    db.session.add(new_listing)
+    db.session.commit()
+    return redirect('/')
+
