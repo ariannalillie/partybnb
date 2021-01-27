@@ -25,7 +25,6 @@ const Search = () => {
   useEffect(async () => {
     const res = await fetch(`http://localhost:5000/api/location`)
     const data = await res.json();
-    console.log('DATA', data)
     setLocations(data)
   }, []);
 

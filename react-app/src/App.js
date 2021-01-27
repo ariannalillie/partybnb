@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import Location from "./components/Location";
+import CreateListing from "./components/CreateListing";
 import Listing from "./components/Listing";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
@@ -49,6 +50,9 @@ function App() {
         </Route>
         <Route path="/locations" exact={true}>
             <Location />
+        </Route>
+        <Route path="/createlisting" exact={true} authenticated={authenticated}>
+            <CreateListing />
         </Route>
         <Route path="/locations/:id" exact={true}>
           <Listing />
