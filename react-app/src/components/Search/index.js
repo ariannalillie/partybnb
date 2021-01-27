@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import './Search.css';
 import {searchLocations} from "../../store/locations";
 import { useSelector, useDispatch } from "react-redux";
+import search from "../../media/search.svg"
+
 // import Location from "../../../../app/models/";
 
 
@@ -54,7 +56,6 @@ const Search = () => {
   // useEffect(async () => {
   //   const res = await fetch(`http://localhost:5000/api/location`)
   //   const data = await res.json();
-  //   console.log('DATA', data)
   //   setLocations(data)
   // }, []);
 
@@ -88,7 +89,7 @@ const Search = () => {
             value={numGuests}
             onChange={(e) => setNumGuests(e.target.value)}
           ></input>
-          <button className="search-button"></button>
+          <button className="search-button"><img src={search} alt="Logo" className="search"/></button>
         </div>
       </form>
     </div>
