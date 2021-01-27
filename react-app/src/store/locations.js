@@ -1,6 +1,7 @@
 export const LOAD_LOCATIONS = "./locations/LOAD_LOCATIONS";
 export const LOAD_SINGLE_LOCATION = "./locations/LOAD_SINGLE_LOCATION";
 export const LOAD_SEARCH = "./locations/LOAD_SEARCH";
+export const ADD_LISTING = "./locations/ADD_LISTING";
 
 const loadAllLocations = (locationlist) => ({
   type: LOAD_LOCATIONS,
@@ -15,6 +16,11 @@ const loadSingleLocation = (location) => ({
 const loadSearch = (locationlist) => ({
   type: LOAD_SEARCH,
   locationlist,
+});
+
+const addLocation = location => ({
+    type: ADD_LISTING,
+    location
 });
 
 export const getLocations = () => async (dispatch) => {
@@ -53,13 +59,30 @@ export const searchLocations = (payload) => async (dispatch) => {
   const response = await fetch(
     `http://localhost:5000/api/location/proximity/${searchLat}/${searchLng}`
   );
-  
+
   if (response.ok) {
     const locationsNearSearchArea = await response.json()
     console.log("This is the locations search area.     ",locationsNearSearchArea.closeProximityLocations)
     dispatch(loadSearch(locationsNearSearchArea));
   }
 };
+
+export const createListing = (payload) => async dispatch => {
+    console.log('PAYLOAD 2', payload)
+    const { title, description, venueType, amenities, maxGuests, bookingPrice, address, city, state, zipcode } = payload;
+    const response = await fetch(`/api/location/createlisting`, {
+      method: 'POST',
+      body: JSON.stringify({
+          title, description, venueType, amenities, maxGuests, bookingPrice, address, city, state, zipcode
+      }),
+    });
+    if (response.ok) {
+      const location = await response.json();
+      debugger
+      dispatch(addLocation(location));
+  }
+}
+
 
 const initialState = {
   locationlist: [],
@@ -86,7 +109,25 @@ const locationReducer = (state = initialState, action) => {
         locationlist: action.locationlist.closeProximityLocations,
       };
     }
-
+    case ADD_LISTING: {
+        if (!state[action.locationlist.id]) {
+            const newState = {
+              ...state,
+              [action.locationlist.id]: action.locationlist
+            };
+            const locationList = newState.locationlist.map(location => newState[location.id]);
+            locationList.push(action.shelf);
+            newState.shelf = locationList;
+            return newState;
+          }
+          return {
+            ...state,
+            [action.locationlist.id]: {
+              ...state[action.locationlist.id],
+              ...action.locationlist,
+            }
+          };
+        }
     default:
       return state;
   }
