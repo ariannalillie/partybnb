@@ -1,0 +1,11 @@
+.map-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    height: 960px;
+
+}
+
+.white-space {
+    background-color: white;
+}
