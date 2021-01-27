@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import './Search.css';
+import {searchLocations} from "../../store/locations";
+import { useSelector, useDispatch } from "react-redux";
 import search from "../../media/search.svg"
+
 // import Location from "../../../../app/models/";
 
 
@@ -13,19 +16,47 @@ const fakeData = {
   bookingPrice: "500",
 };
 const Search = () => {
+  const dispatch = useDispatch()
+  const [locations, setLocations] = useState("")
   const [queryLocation, setQueryLocation] = useState("")
   const [checkInDate, setCheckInDate] = useState();
   const [checkOutDate, setCheckOutDate] = useState();
   const [numGuests, setNumGuests] = useState(1)
+  
+  
   const submitForm = async (e) => {
-    e.preventDefalt();
+    e.preventDefault();
+    let spaceRemover = queryLocation.split(" ").join("%20")
+    const payload = {spaceRemover}
+    dispatch(searchLocations(payload))
+  
+  
 
+    // const res = await fetch(
+    //   `https://google-maps-geocoding.p.rapidapi.com/geocode/json?address=${spaceRemover}`,
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       "x-rapidapi-key":
+    //         "20dde32ademsha97b6dc9dd8189bp1973e4jsnbc1294ead8c1",
+    //       "x-rapidapi-host": "google-maps-geocoding.p.rapidapi.com",
+    //     },
+    //   }
+    // );
+    // const googleResponse = await res.json()
+
+    // let searchLat = await googleResponse.results[0].geometry.location.lat
+    // let searchLng = await googleResponse.results[0].geometry.location.lng
+    // // // let searchbuffer = 0.08 // 69mi/1deg 
+    // const locationsNearSearchArea = await fetch(`http://localhost:5000/api/location/proximity/${searchLat}/${searchLng}`)
+    
+    // console.log("just work...     ", searchLat, searchLng);
   };
 
   // useEffect(async () => {
   //   const res = await fetch(`http://localhost:5000/api/location`)
   //   const data = await res.json();
-  //   // setWineries(data)
+  //   setLocations(data)
   // }, []);
 
   return (

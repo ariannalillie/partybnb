@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
+import Location from "./components/Location";
+import Listing from "./components/Listing";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -47,6 +49,12 @@ function App() {
             authenticated={authenticated}
             setAuthenticated={setAuthenticated}
           />
+        </Route>
+        <Route path="/locations" exact={true}>
+            <Location />
+        </Route>
+        <Route path="/locations/:id" exact={true}>
+          <Listing />
         </Route>
 
         <ProtectedRoute
