@@ -34,8 +34,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} />
-      <Home/>
-      < SimpleMap/>
+
 
       <Switch>
         <Route path="/login" exact={true}>
@@ -56,7 +55,10 @@ function App() {
         <Route path="/locations/:id" exact={true}>
           <Listing />
         </Route>
-
+        <Route path="/">
+          <Home/>
+          < SimpleMap/>
+        </Route>
         <ProtectedRoute
           path="/users"
           exact={true}
@@ -72,7 +74,8 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
+          <Home/>
+          < SimpleMap/>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
