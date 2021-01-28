@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String)
     username = db.Column(db.String)
     email = db.Column(db.String(255), nullable=False)
-    hashed_password = db.Column(db.String(255), nullable = False)
+    hashed_password = db.Column(db.String(255), nullable=False)
     bookings = relationship("Booking", back_populates="users")
     locations = relationship("Location", back_populates="users")
     photos = relationship("Photo", back_populates="users")
@@ -39,8 +39,8 @@ class User(db.Model, UserMixin):
 
 
 class Location(db.Model):
-    __tablename__='locations'
-    id = db.Column(db.Integer, primary_key = True)
+    __tablename__ = 'locations'
+    id = db.Column(db.Integer, primary_key=True)
     users_OwnerId = db.Column(db.Integer, ForeignKey('users.id'))
     latitude = db.Column(db.Integer)
     longitude = db.Column(db.Integer)
@@ -58,7 +58,7 @@ class Location(db.Model):
     users = relationship("User", back_populates="locations")
     bookings = relationship("Booking", back_populates="locations")
     reviews = relationship("Review", back_populates="locations")
-    photos = relationship("Photo", back_populates="locations")
+    photos = relationship("Photo", back_populates="locations", uselist=False)
 
     def to_dict(self):
         return {
@@ -74,11 +74,13 @@ class Location(db.Model):
             "city": self.city,
             "state": self.state,
             "zipcode": self.zipcode,
+            "photos": self.photos.to_dict()
         }
+
 
 class Booking(db.Model):
     __tablename__ = 'bookings'
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     users_id = db.Column(db.Integer, ForeignKey('users.id'))
     locations_id = db.Column(db.Integer, ForeignKey('locations.id'))
     startDate = db.Column(db.Date)
@@ -87,26 +89,32 @@ class Booking(db.Model):
     totalPrice = db.Column(db.Integer)
     additionalReq = db.Column(db.String)
 
-
     users = relationship("User", back_populates="bookings")
     locations = relationship("Location", back_populates="bookings")
 
+
 class Review(db.Model):
-    __tablename__ ='reviews'
-    id = db.Column(db.Integer, primary_key = True)
+    __tablename__ = 'reviews'
+    id = db.Column(db.Integer, primary_key=True)
     locations_id = db.Column(db.Integer, ForeignKey('locations.id'))
     stars = db.Column(db.Integer)
     review = db.Column(db.String)
 
     locations = relationship("Location", back_populates="reviews")
 
+
 class Photo(db.Model):
     __tablename__ = 'photos'
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     locations_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
     photoUrl = db.Column(db.String)
 
-
     users = relationship("User", back_populates="photos")
     locations = relationship("Location", back_populates="photos")
+
+    def to_dict(self):
+        return {
+            "locations_id": self.locations_id,
+            "photoUrl": self.photoUrl
+        }

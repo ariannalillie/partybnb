@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSingleLocation } from "../../store/locations";
+import "./Listing.css";
 
 const Listing = () => {
     const { id } = useParams();
@@ -20,7 +21,7 @@ const Listing = () => {
         <div className='location'>
                  <h1>{listing.title}</h1>
                  <div>
-                    <img src={listing.photos.photoUrl} alt="eventspace" />
+                    <img class="listingphoto" src={listing.photos.photoUrl} alt="eventspace" />
                     <p>Venue Type: {listing.venueType}</p>
                     <p>Max Guests: {listing.maxGuests}</p>
                     <p>Description: {listing.description}</p>

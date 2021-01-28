@@ -50,11 +50,14 @@ function App() {
                     />
                 </Route>
                 <Route path="/locations/:id" exact={true}>
-                    <Listing />
+                    <Listing>
+                        <SimpleMap />
+                    </Listing>
                 </Route>
                 <Route path="/locations" exact={true}>
                     <Location />
                 </Route>
+
                 <Route path="/">
                     <Home />
                     <SimpleMap />
