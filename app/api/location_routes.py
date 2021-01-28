@@ -1,6 +1,7 @@
 from flask_login import login_required, current_user
+from sqlalchemy import or_
 from flask import Blueprint, jsonify, request, redirect
-from app.models import db, Location, User
+from app.models import db, Location, User, Booking
 
 
 location_routes = Blueprint('location', __name__)
@@ -12,16 +13,20 @@ def locations():
     return {"locations": [location.to_dict() for location in locations]}
 
 
-@location_routes.route('/proximity/<lat>/<lng>')
-def closeProximity(lat, lng):
+@location_routes.route('/proximity/<lat>/<lng>/<chkin>/<chkout>/<guests>')
+def closeProximity(lat, lng, chkin, chkout, guests):
 
     latUpper = float(lat) + 10
     latLower = float(lat) - 10
     lngUpper = float(lng) + 10
     lngLower = float(lng) - 10
-    closeProximityLocations = Location.query.filter(Location.latitude.between(latLower, latUpper)).filter(Location.longitude.between(lngLower, lngUpper))
+    # closeProximityLocations = Location.query.join(Booking).filter(or_(Booking.id == None, Booking.id == 2, Booking.id ==1))
+    closeProximityLocations = Location.query.filter(Location.latitude.between(latLower, latUpper)).filter(Location.longitude.between(lngLower, lngUpper)). \
+            filter(or_(Booking.startDate < chkin, Booking.endDate > chkout, Booking.startDate == None)). \
+                filter(or_(Booking.endDate < chkin, Booking.endDate > chkout, Booking.startDate == None))
     # closeProximityLocations = Location.query.filter(Location.latitude.between(31, 34))
     # closeProximityLocations = Location.query.all()
+    print("print me out123412341234123414!!!!!!!!!!!!!!!!!!:   ", closeProximityLocations)
     return {"closeProximityLocations": [location.to_dict() for location in closeProximityLocations]}
     # return closeProximityLocations
 

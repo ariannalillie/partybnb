@@ -27,7 +27,11 @@ const Search = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     let spaceRemover = queryLocation.split(" ").join("%20")
-    const payload = {spaceRemover}
+    let today = new Date()
+    if(numGuests == null || numGuests <1){
+      numGuests = 1
+    }
+    const payload = {spaceRemover, checkInDate, checkOutDate, numGuests}
     dispatch(searchLocations(payload))
   
   
