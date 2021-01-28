@@ -33,12 +33,13 @@ const SimpleMap = () => {
         <div className="white-space"></div>
         <div style={{ height: "600px", width: "600px" }}>
           <GoogleMapReact
+
             bootstrapURLKeys={{
               key: "AIzaSyCZbGlAdCHt_MtMKoGtGXvkSZWuNUBQSNo",
             }}
             defaultCenter={defaultProps.center}
             defaultZoom={defaultProps.zoom}
-          >
+        
             <AnyReactComponent
               lat={59.955413}
               lng={-116.337844}

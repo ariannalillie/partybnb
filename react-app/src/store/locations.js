@@ -26,7 +26,7 @@ const loadSearch = (locationlist) => ({
 });
 
 export const getLocations = () => async (dispatch) => {
-  const response = await fetch(`/api/location`);
+  const response = await fetch(`/api/location/`);
 
   if (response.ok) {
     const locations = await response.json();
