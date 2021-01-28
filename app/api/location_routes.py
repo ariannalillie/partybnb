@@ -12,7 +12,6 @@ def locations():
     return {"locations": [location.to_dict() for location in locations]}
 
 
-
 @location_routes.route('/proximity/<lat>/<lng>')
 def closeProximity(lat, lng):
 
@@ -26,10 +25,6 @@ def closeProximity(lat, lng):
     return {"closeProximityLocations": [location.to_dict() for location in closeProximityLocations]}
     # return closeProximityLocations
 
-@location_routes.route('/<id>')
-def individualListing(id):
-    listing = Location.query.get(id)
-    return {"listing": listing.to_dict() }
 
 @location_routes.route('/createlisting', methods=["POST"])
 @login_required
@@ -41,3 +36,9 @@ def addListing():
     db.session.add(new_listing)
     db.session.commit()
     return redirect('/')
+
+
+@location_routes.route('/<id>')
+def individualListing(id):
+    listing = Location.query.get(id)
+    return {"listing": listing.to_dict() }
