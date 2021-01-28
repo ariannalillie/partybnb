@@ -4,6 +4,7 @@ import {searchLocations} from "../../store/locations";
 import { useSelector, useDispatch } from "react-redux";
 import search from "../../media/search.svg"
 
+
 // import Location from "../../../../app/models/";
 
 

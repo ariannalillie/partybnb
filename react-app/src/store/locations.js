@@ -64,8 +64,10 @@ export const searchLocations = (payload) => async (dispatch) => {
 
   if (response.ok) {
     const locationsNearSearchArea = await response.json()
-    // console.log("This is the additional info:     ",checkInDate, checkOutDate, numGuests)
-    dispatch(loadSearch(locationsNearSearchArea));
+    const searchCoord = [searchLat, searchLng]
+    const combinedPayload = [locationsNearSearchArea, searchCoord]
+    console.log("This is the additional info:     ",locationsNearSearchArea)
+    dispatch(loadSearch(combinedPayload));
   }
 };
 
@@ -89,6 +91,7 @@ export const createListing = (payload) => async dispatch => {
 const initialState = {
   locationlist: [],
   location: {},
+  searchLocation: {}
 };
 
   const locationReducer = (state = initialState, action) => {
@@ -98,6 +101,7 @@ const initialState = {
             return {
               ...state,
               locationlist: action.locationlist.locations,
+              
             };
         }
         case LOAD_SINGLE_LOCATION: {
@@ -128,9 +132,10 @@ const initialState = {
            case LOAD_SEARCH: {
 
             return {
-        ...state,
-        locationlist: action.locationlist.closeProximityLocations,
-      };
+              ...state,
+              locationlist: action.locationlist[0].closeProximityLocations,
+              searchLocation: action.locationlist[1]
+            };
     }
 
         default:

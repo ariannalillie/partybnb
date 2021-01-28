@@ -27,7 +27,6 @@ def closeProximity(lat, lng, chkin, chkout, guests):
                     filter(or_(Location.maxGuests >= guests, Location.maxGuests == None))
     # closeProximityLocations = Location.query.filter(Location.latitude.between(31, 34))
     # closeProximityLocations = Location.query.all()
-    print("print me out123412341234123414!!!!!!!!!!!!!!!!!!:   ", closeProximityLocations)
     return {"closeProximityLocations": [location.to_dict() for location in closeProximityLocations]}
     # return closeProximityLocations
 

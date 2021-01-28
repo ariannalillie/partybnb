@@ -50,17 +50,21 @@ function App() {
           />
         </Route>
         <Route path="/locations/:id" exact={true}>
-          <Listing />
+          <Listing>
+            <SimpleMap />
+          </Listing>
         </Route>
         <Route path="/locations" exact={true}>
-            <Location />
+          <Location />
+         
+            
         </Route>
         <Route path="/createlisting" exact={true} authenticated={authenticated}>
           <CreateListing />
         </Route>
         <Route path="/">
-          <Home/>
-          < SimpleMap/>
+          <Home />
+          <SimpleMap />
         </Route>
         <ProtectedRoute
           path="/users"
@@ -77,8 +81,8 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <Home/>
-          < SimpleMap/>
+          <Home />
+          <SimpleMap />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
