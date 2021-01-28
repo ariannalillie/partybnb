@@ -11,7 +11,6 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import Home from "./components/Home";
 import { authenticate } from "./services/auth";
-import Search from "./components/Search";
 import SimpleMap from "./components/SimpleMap";
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       const user = await authenticate();
       if (!user.errors) {
         setAuthenticated(true);
@@ -29,7 +28,6 @@ function App() {
   }, []);
 
   if (!loaded) {
-    console.log('anything')
     return null;
   }
 
@@ -53,14 +51,11 @@ function App() {
           <Listing />
         </Route>
         <Route path="/locations" exact={true}>
-            <Location />
-        </Route>
-        <Route path="/createlisting" exact={true} authenticated={authenticated}>
-          <CreateListing />
+          <Location />
         </Route>
         <Route path="/">
-          <Home/>
-          < SimpleMap/>
+          <Home />
+          < SimpleMap />
         </Route>
         <ProtectedRoute
           path="/users"
@@ -77,8 +72,8 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <Home/>
-          < SimpleMap/>
+          <Home />
+          < SimpleMap />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

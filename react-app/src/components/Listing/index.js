@@ -7,7 +7,6 @@ const Listing = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const listing = useSelector(state => state.locations.location);
-    // const listing = {}
 
     useEffect(() => {
         dispatch(getSingleLocation(id))
@@ -21,6 +20,7 @@ const Listing = () => {
         <div className='location'>
                  <h1>{listing.title}</h1>
                  <div>
+                    <img src={listing.photos.photoUrl} alt="eventspace" />
                     <p>Venue Type: {listing.venueType}</p>
                     <p>Max Guests: {listing.maxGuests}</p>
                     <p>Description: {listing.description}</p>
