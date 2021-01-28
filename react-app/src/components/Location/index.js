@@ -6,14 +6,18 @@ import { getLocations } from "../../store/locations";
 import CreateListing from "../CreateListing"
 
 const Location = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const locationlist = useSelector(state => state.locations.locationlist);
-    useEffect(() => {
-        dispatch(getLocations())
-      }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getLocations())
+    //   }, [dispatch]);
 
       if (!locationlist) {
-          return null;
+          return (
+              <div>
+              <p>Please go back to the home page to search for an eventspace.</p>
+              </div>
+          );
       }
 
     return (
