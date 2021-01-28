@@ -29,6 +29,7 @@ function App() {
   }, []);
 
   if (!loaded) {
+    console.log('anything')
     return null;
   }
 
@@ -48,17 +49,14 @@ function App() {
             setAuthenticated={setAuthenticated}
           />
         </Route>
+        <Route path="/locations/:id" exact={true}>
+          <Listing />
+        </Route>
         <Route path="/locations" exact={true}>
             <Location />
         </Route>
         <Route path="/createlisting" exact={true} authenticated={authenticated}>
-            <CreateListing />
-        </Route>
-        <Route path="/locations/:id" exact={true}>
-          <Listing />
-        </Route>
-        <Route path="/createlisting" exact={true} authenticated={authenticated}>
-            <CreateListing />
+          <CreateListing />
         </Route>
         <Route path="/">
           <Home/>
