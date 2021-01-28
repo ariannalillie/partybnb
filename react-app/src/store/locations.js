@@ -2,6 +2,7 @@ export const LOAD_LOCATIONS = './locations/LOAD_LOCATIONS';
 export const LOAD_SINGLE_LOCATION = './locations/LOAD_SINGLE_LOCATION';
 export const ADD_LISTING = './locations/ADD_LISTING';
 export const LOAD_SEARCH = "./locations/LOAD_SEARCH";
+export const ADD_LISTING = "./locations/ADD_LISTING";
 
 
 const loadAllLocations = (locationlist) => ({
@@ -24,7 +25,7 @@ const loadSearch = (locationlist) => ({
   type: LOAD_SEARCH,
   locationlist,
 });
-  
+
 export const getLocations = () => async (dispatch) => {
   const response = await fetch(`/api/location`);
 
@@ -86,7 +87,7 @@ export const searchLocations = (payload) => async (dispatch) => {
   const response = await fetch(
     `http://localhost:5000/api/location/proximity/${searchLat}/${searchLng}`
   );
-  
+
   if (response.ok) {
     const locationsNearSearchArea = await response.json()
     console.log("This is the locations search area.     ",locationsNearSearchArea.closeProximityLocations)
@@ -94,10 +95,27 @@ export const searchLocations = (payload) => async (dispatch) => {
   }
 };
 
-  const initialState = {
-    locationlist: [],
-    location: {}
-  };
+export const createListing = (payload) => async dispatch => {
+    console.log('PAYLOAD 2', payload)
+    const { title, description, venueType, amenities, maxGuests, bookingPrice, address, city, state, zipcode } = payload;
+    const response = await fetch(`/api/location/createlisting`, {
+      method: 'POST',
+      body: JSON.stringify({
+          title, description, venueType, amenities, maxGuests, bookingPrice, address, city, state, zipcode
+      }),
+    });
+    if (response.ok) {
+      const location = await response.json();
+      debugger
+      dispatch(addLocation(location));
+  }
+}
+
+
+const initialState = {
+  locationlist: [],
+  location: {},
+};
 
   const locationReducer = (state = initialState, action) => {
     // debugger;
@@ -134,14 +152,16 @@ export const searchLocations = (payload) => async (dispatch) => {
               };
             }
            case LOAD_SEARCH: {
-      return {
+      
+            return {
         ...state,
         locationlist: action.locationlist.closeProximityLocations,
       };
     }
+        
         default:
           return state;
       }
-
+  }
 
 export default locationReducer;

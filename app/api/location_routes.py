@@ -1,7 +1,7 @@
+from flask_login import login_required, current_user
 from flask import Blueprint, jsonify, request, redirect
-from flask_login import login_required
 from app.models import db, Location, User
-from flask_login import current_user
+
 
 location_routes = Blueprint('location', __name__)
 
@@ -15,7 +15,7 @@ def locations():
 
 @location_routes.route('/proximity/<lat>/<lng>')
 def closeProximity(lat, lng):
- 
+
     latUpper = float(lat) + 10
     latLower = float(lat) - 10
     lngUpper = float(lng) + 10
@@ -29,7 +29,6 @@ def closeProximity(lat, lng):
 @location_routes.route('/<id>')
 def individualListing(id):
     listing = Location.query.get(id)
-
     return {"listing": listing.to_dict() }
 
 @location_routes.route('/createlisting', methods=["POST"])
@@ -42,4 +41,3 @@ def addListing():
     db.session.add(new_listing)
     db.session.commit()
     return redirect('/')
-
