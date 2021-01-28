@@ -36,10 +36,14 @@ const Location = () => {
                     <p>Booking Price: {location.bookingPrice}</p>
                     <p>Address: {location.address}, {location.city}, {location.state} {location.zipcode}</p>
                 </div>
-                </>
-             )}
+              </>
+            ))}
+          </div>
+          <div>
+          </div>
         </div>
-    )
+      
+    );
 }
 
 export default Location;

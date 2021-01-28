@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {  useHistory } from "react-router-dom";
 import search from "../../media/search.svg";
 
+
 // import Location from "../../../../app/models/";
 
 const fakeData = {

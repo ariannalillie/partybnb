@@ -48,11 +48,14 @@ function App() {
           />
         </Route>
         <Route path="/locations/:id" exact={true}>
-          <Listing />
+          <Listing>
+            <SimpleMap />
+          </Listing>
         </Route>
         <Route path="/locations" exact={true}>
-          <Location />
+          <Location />    
         </Route>
+
         <Route path="/">
           <Home />
           < SimpleMap />
@@ -73,7 +76,7 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <Home />
-          < SimpleMap />
+          <SimpleMap />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
