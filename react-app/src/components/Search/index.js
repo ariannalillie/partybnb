@@ -22,15 +22,15 @@ const Search = () => {
   const [checkInDate, setCheckInDate] = useState();
   const [checkOutDate, setCheckOutDate] = useState();
   const [numGuests, setNumGuests] = useState(1)
-  
-  
+
+
   const submitForm = async (e) => {
     e.preventDefault();
     let spaceRemover = queryLocation.split(" ").join("%20")
     const payload = {spaceRemover}
     dispatch(searchLocations(payload))
-  
-  
+
+
 
     // const res = await fetch(
     //   `https://google-maps-geocoding.p.rapidapi.com/geocode/json?address=${spaceRemover}`,
@@ -47,18 +47,22 @@ const Search = () => {
 
     // let searchLat = await googleResponse.results[0].geometry.location.lat
     // let searchLng = await googleResponse.results[0].geometry.location.lng
-    // // // let searchbuffer = 0.08 // 69mi/1deg 
+    // // // let searchbuffer = 0.08 // 69mi/1deg
     // const locationsNearSearchArea = await fetch(`http://localhost:5000/api/location/proximity/${searchLat}/${searchLng}`)
-    
+
     // console.log("just work...     ", searchLat, searchLng);
   };
 
 
-  useEffect(async () => {
-    const res = await fetch(`http://localhost:5000/api/location`)
-    const data = await res.json();
-    setLocations(data)
+  useEffect(() => {
+    const fetchLocations = async () =>{
+      const res = await fetch(`http://localhost:5000/api/location`)
+      const data = await res.json();
+      setLocations(data)
+    }
+    fetchLocations();
   }, []);
+
 
   // useEffect(async () => {
   //   const res = await fetch(`http://localhost:5000/api/location`)

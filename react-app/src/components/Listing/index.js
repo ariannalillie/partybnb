@@ -7,14 +7,15 @@ const Listing = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const listing = useSelector(state => state.locations.location);
+    // const listing = {}
 
     useEffect(() => {
         dispatch(getSingleLocation(id))
       }, [dispatch]);
 
-      if (!listing) {
-          return null;
-      }
+    if (!listing.title) {
+        return null;
+    }
 
     return (
         <div className='location'>

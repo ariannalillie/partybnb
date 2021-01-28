@@ -30,7 +30,6 @@ export const getLocations = () => async (dispatch) => {
 
   if (response.ok) {
     const locations = await response.json();
-    console.log("this is the locations:   ",locations)
     dispatch(loadAllLocations(locations));
   }
 };
@@ -39,6 +38,7 @@ export const getSingleLocation = (id) => async (dispatch) => {
   const response = await fetch(`/api/location/${id}`);
   if (response.ok) {
     const locations = await response.json();
+    console.log("this is the locations:   ",locations)
     dispatch(loadSingleLocation(locations));
   }
 };
