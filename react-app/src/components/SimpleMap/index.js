@@ -6,7 +6,7 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 
 const SimpleMap = () => {
-  let latitude 
+  let latitude
   let longitude
   let searchCoords = useSelector(state => state.searchLocation)
   if (!searchCoords){
@@ -16,8 +16,8 @@ const SimpleMap = () => {
     latitude = searchCoords[0]
     longitude = searchCoords[1]
   }
-  
-  
+
+
   let defaultProps = {
     center: {
       lat: latitude,
@@ -26,12 +26,12 @@ const SimpleMap = () => {
     zoom: 10
   };
 
-  
+
     return (
       <div className="map-page">
-        
+
         <div className="white-space"></div>
-        <div style={{ height: "600px", width: "600px" }}>
+        <div style={{ height: "100vh", width: "100%"}}>
           <GoogleMapReact
 
             bootstrapURLKeys={{
@@ -39,7 +39,7 @@ const SimpleMap = () => {
             }}
             defaultCenter={defaultProps.center}
             defaultZoom={defaultProps.zoom}
-        
+          >
             <AnyReactComponent
               lat={59.955413}
               lng={-116.337844}
@@ -49,7 +49,7 @@ const SimpleMap = () => {
         </div>
       </div>
     );
-  
+
 }
 
 export default SimpleMap;
