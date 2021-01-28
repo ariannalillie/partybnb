@@ -44,7 +44,7 @@ export const getSingleLocation = (id) => async (dispatch) => {
 };
 
 export const searchLocations = (payload) => async (dispatch) => {
-  const {spaceRemover} = payload
+  const {spaceRemover, checkInDate, checkOutDate, numGuests} = payload
   const res = await fetch(
     `https://google-maps-geocoding.p.rapidapi.com/geocode/json?address=${spaceRemover}`,
     {
@@ -59,12 +59,12 @@ export const searchLocations = (payload) => async (dispatch) => {
   let searchLat = await googleResponse.results[0].geometry.location.lat;
   let searchLng = await googleResponse.results[0].geometry.location.lng;
   const response = await fetch(
-    `http://localhost:5000/api/location/proximity/${searchLat}/${searchLng}`
+    `http://localhost:5000/api/location/proximity/${searchLat}/${searchLng}/${checkInDate}/${checkOutDate}/${numGuests}`
   );
 
   if (response.ok) {
     const locationsNearSearchArea = await response.json()
-    console.log("This is the locations search area.     ",locationsNearSearchArea.closeProximityLocations)
+    // console.log("This is the additional info:     ",checkInDate, checkOutDate, numGuests)
     dispatch(loadSearch(locationsNearSearchArea));
   }
 };

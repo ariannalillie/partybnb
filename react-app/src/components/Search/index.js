@@ -19,15 +19,18 @@ const Search = () => {
   const dispatch = useDispatch()
   const [locations, setLocations] = useState("")
   const [queryLocation, setQueryLocation] = useState("")
-  const [checkInDate, setCheckInDate] = useState();
-  const [checkOutDate, setCheckOutDate] = useState();
-  const [numGuests, setNumGuests] = useState(1)
 
+  let [checkInDate, setCheckInDate] = useState();
+  let [checkOutDate, setCheckOutDate] = useState();
+  let [numGuests, setNumGuests] = useState(1)
 
   const submitForm = async (e) => {
     e.preventDefault();
     let spaceRemover = queryLocation.split(" ").join("%20")
-    const payload = {spaceRemover}
+    if(numGuests == null || numGuests <1){
+      numGuests = 1
+    }
+    const payload = {spaceRemover, checkInDate, checkOutDate, numGuests}
     dispatch(searchLocations(payload))
 
 
