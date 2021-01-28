@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Search from "../Search";
 import { useSelector, useDispatch } from 'react-redux';
 import { getLocations } from "../../store/locations";
+import CreateListing from "../CreateListing"
 
 const Location = () => {
     const dispatch = useDispatch();
@@ -17,11 +18,13 @@ const Location = () => {
 
     return (
         <div className='location'>
+                <CreateListing />
                 <Search />
                 {locationlist.map(location =>
                 <>
                  <h1><Link to={`/locations/${location.id}`}>{location.title}</Link></h1>
                  <div>
+                    <img src={location.photos.photoUrl} alt="eventspace" />
                     <p>Venue Type: {location.venueType}</p>
                     <p>Max Guests: {location.maxGuests}</p>
                     <p>Description: {location.description}</p>

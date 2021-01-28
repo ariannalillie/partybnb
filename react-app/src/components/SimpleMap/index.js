@@ -18,7 +18,7 @@ class SimpleMap extends Component {
         <div className="white-space"></div>
         <div style={{ height: '100vh', width: '100%' }}>
           <GoogleMapReact
-            bootstrapURLKeys={{ key: "AIzaSyCSTvShnJxFlFIH6X0-uEV5hZXKZAM7xdg" }}
+            bootstrapURLKeys={{ key: "AIzaSyCZbGlAdCHt_MtMKoGtGXvkSZWuNUBQSNo" }}
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
