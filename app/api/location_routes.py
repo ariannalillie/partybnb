@@ -36,7 +36,7 @@ def addListing():
     form_data = request.get_json(force=True)
     print('FORM DATA', form_data)
     print('USER ID', current_user.id)
-    new_listing = Location(users_OwnerId=current_user.id,title=form_data["title"],venueType=form_data["venueType"], description=form_data["description"], amenities=form_data["amenities"], maxGuests=form_data["maxGuests"], bookingPrice=form_data["bookingPrice"], address=form_data["address"], city=form_data["city"], state=form_data["state"], zipcode=form_data["zipcode"])
+    new_listing = Location(users_OwnerId=current_user.id,title=form_data["title"],venueType=form_data["venueType"], description=form_data["description"], amenities=form_data["amenities"], maxGuests=form_data["maxGuests"], bookingPrice=form_data["bookingPrice"], address=form_data["address"], city=form_data["city"], state=form_data["state"], zipcode=form_data["zipcode"], latitude=form_data["latitude"], longitude=form_data["longitude"])
     db.session.add(new_listing)
     db.session.commit()
     return redirect('/')
