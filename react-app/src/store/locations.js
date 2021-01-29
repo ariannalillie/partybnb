@@ -91,7 +91,7 @@ export const createListing = (payload) => async dispatch => {
 const initialState = {
   locationlist: [],
   location: {},
-  searchLocation: {}
+  searchLocation: [36.1699, -115.1398]
 };
 
   const locationReducer = (state = initialState, action) => {

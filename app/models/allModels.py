@@ -64,6 +64,7 @@ class Location(db.Model):
         return {
             "id": self.id,
             "latitude": self.latitude,
+            "longitude": self.longitude,
             "venueType": self.venueType,
             "description": self.description,
             "title": self.title,
