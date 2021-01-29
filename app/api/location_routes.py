@@ -22,9 +22,8 @@ def closeProximity(lat, lng, chkin, chkout, guests):
     lngLower = float(lng) - 10
     # closeProximityLocations = Location.query.join(Booking).filter(or_(Booking.id == None, Booking.id == 2, Booking.id ==1))
     closeProximityLocations = Location.query.filter(Location.latitude.between(latLower, latUpper)).filter(Location.longitude.between(lngLower, lngUpper)). \
-            filter(or_(Booking.startDate < chkin, Booking.endDate > chkout, Booking.startDate == None)). \
-                filter(or_(Booking.endDate < chkin, Booking.endDate > chkout, Booking.startDate == None)). \
-                    filter(or_(Location.maxGuests >= guests, Location.maxGuests == None))
+        filter(or_(Booking.startDate < chkin, Booking.endDate > chkout, Booking.startDate == None, Booking.endDate == None))
+        # filter(or_(Location.maxGuests >= guests, Location.maxGuests == None))
     # closeProximityLocations = Location.query.filter(Location.latitude.between(31, 34))
     # closeProximityLocations = Location.query.all()
     return {"closeProximityLocations": [location.to_dict() for location in closeProximityLocations]}

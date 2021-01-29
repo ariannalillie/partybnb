@@ -39,7 +39,7 @@ const Search = () => {
 
   useEffect(() => {
     const fetchLocations = async () =>{
-      const res = await fetch(`http://localhost:5000/api/location/`)
+      const res = await fetch(`/api/location/`)
       const data = await res.json();
       setLocations(data)
     }
