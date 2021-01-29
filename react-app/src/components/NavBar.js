@@ -15,8 +15,7 @@ const NavBar = ({ authenticated, setAuthenticated }) => {
                         Home
                     </NavLink>
                 </li>
-                <li>
-                    {!authenticated && 
+                {!authenticated &&<li>
                         <NavLink
                             to="/login"
                             exact={true}
@@ -24,10 +23,8 @@ const NavBar = ({ authenticated, setAuthenticated }) => {
                         >
                             Login
                         </NavLink>
-                    }
-                </li>
-                <li>
-                    {!authenticated && 
+                </li>}
+                {!authenticated &&<li>
                         <NavLink
                             to="/sign-up"
                             exact={true}
@@ -35,8 +32,7 @@ const NavBar = ({ authenticated, setAuthenticated }) => {
                         >
                             Sign Up
                         </NavLink>
-                    }
-                </li>
+                </li>}
                 <li>
                     <NavLink to="/users" exact={true} activeClassName="active">
                         Users
