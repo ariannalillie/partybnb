@@ -38,7 +38,6 @@ export const getSingleLocation = (id) => async (dispatch) => {
   const response = await fetch(`/api/location/${id}`);
   if (response.ok) {
     const locations = await response.json();
-    console.log("this is the locations:   ",locations)
     dispatch(loadSingleLocation(locations));
   }
 };
@@ -55,24 +54,24 @@ export const searchLocations = (payload) => async (dispatch) => {
       },
     }
   );
+
+  console.log('numGuests.....', numGuests)
   const googleResponse = await res.json();
   let searchLat = await googleResponse.results[0].geometry.location.lat;
   let searchLng = await googleResponse.results[0].geometry.location.lng;
   const response = await fetch(
-    `http://localhost:5000/api/location/proximity/${searchLat}/${searchLng}/${checkInDate}/${checkOutDate}/${numGuests}`
+    `/api/location/proximity/${searchLat}/${searchLng}/${checkInDate}/${checkOutDate}/${numGuests}`
   );
 
   if (response.ok) {
     const locationsNearSearchArea = await response.json()
     const searchCoord = [searchLat, searchLng]
     const combinedPayload = [locationsNearSearchArea, searchCoord]
-    console.log("This is the additional info:     ",locationsNearSearchArea)
     dispatch(loadSearch(combinedPayload));
   }
 };
 
 export const createListing = (payload) => async dispatch => {
-    console.log('PAYLOAD 2', payload)
     const { title, description, venueType, amenities, maxGuests, bookingPrice, address, city, state, zipcode } = payload;
     const response = await fetch(`/api/location/createlisting`, {
       method: 'POST',
@@ -101,7 +100,7 @@ const initialState = {
             return {
               ...state,
               locationlist: action.locationlist.locations,
-              
+
             };
         }
         case LOAD_SINGLE_LOCATION: {
