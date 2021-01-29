@@ -1,21 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import './NavBar.css';
 
 const NavBar = ({ authenticated, setAuthenticated }) => {
-    console.log('is authenticated:       ', authenticated);
-
-    console.log('set authenticated:       ', setAuthenticated);
-
     return (
-        <nav>
-            <ul>
-                <li>
-                    <NavLink to="/" exact={true} activeClassName="active">
-                        Home
-                    </NavLink>
-                </li>
-                {!authenticated &&<li>
+        <nav class="navigation-bar">
+            <div>
+                <NavLink to="/" exact={true} activeClassName="active">
+                    Home
+                </NavLink>
+              </div>
+                {!authenticated &&<div>
                         <NavLink
                             to="/login"
                             exact={true}
@@ -23,8 +19,8 @@ const NavBar = ({ authenticated, setAuthenticated }) => {
                         >
                             Login
                         </NavLink>
-                </li>}
-                {!authenticated &&<li>
+                </div>}
+                {!authenticated &&<div>
                         <NavLink
                             to="/sign-up"
                             exact={true}
@@ -32,16 +28,15 @@ const NavBar = ({ authenticated, setAuthenticated }) => {
                         >
                             Sign Up
                         </NavLink>
-                </li>}
-                <li>
+                </div>}
+                <div>
                     <NavLink to="/users" exact={true} activeClassName="active">
                         Users
                     </NavLink>
-                </li>
-                <li>
+                </div>
+                <div>
                     <LogoutButton setAuthenticated={setAuthenticated} />
-                </li>
-            </ul>
+                </div>
         </nav>
     );
 };
