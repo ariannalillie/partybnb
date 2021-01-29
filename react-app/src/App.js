@@ -33,7 +33,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar setAuthenticated={setAuthenticated} />
+      <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} />
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm
@@ -53,14 +53,14 @@ function App() {
           </Listing>
         </Route>
         <Route path="/locations" exact={true}>
-          <Location />    
+          <Location />
         </Route>
 
         <Route path="/">
           <Home />
           < SimpleMap />
         </Route>
-        <ProtectedRoute
+        {/* <ProtectedRoute
           path="/users"
           exact={true}
           authenticated={authenticated}
@@ -73,7 +73,7 @@ function App() {
           authenticated={authenticated}
         >
           <User />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <Home />
           <SimpleMap />

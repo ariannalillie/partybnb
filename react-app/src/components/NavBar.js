@@ -5,7 +5,7 @@ import './NavBar.css';
 
 const NavBar = ({ authenticated, setAuthenticated }) => {
     return (
-        <nav class="navigation-bar">
+        <nav className="navigation-bar">
             <div>
                 <NavLink to="/" exact={true} activeClassName="active">
                     Home
@@ -29,11 +29,11 @@ const NavBar = ({ authenticated, setAuthenticated }) => {
                             Sign Up
                         </NavLink>
                 </div>}
-                <div>
+                {/* <div>
                     <NavLink to="/users" exact={true} activeClassName="active">
                         Users
                     </NavLink>
-                </div>
+                </div> */}
                 <div>
                     <LogoutButton setAuthenticated={setAuthenticated} />
                 </div>
