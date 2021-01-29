@@ -31,60 +31,56 @@ function App() {
         return null;
     }
 
-    return (
-        <BrowserRouter>
-            <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated}/>
-            <Switch>
-                <Route path="/login" exact={true}>
-                    <LoginForm
-                        authenticated={authenticated}
-                        setAuthenticated={setAuthenticated}
-                    />
-                </Route>
-                <Route path="/sign-up" exact={true}>
-                    <SignUpForm
-                        authenticated={authenticated}
-                        setAuthenticated={setAuthenticated}
-                    />
-                </Route>
-                <Route path="/locations/:id" exact={true}>
-                    <Listing>
-                        <SimpleMap />
-                    </Listing>
-                </Route>
-                <Route path="/locations" exact={true}>
-                    <Location />
-                </Route>
+  return (
+    <BrowserRouter>
+      <NavBar setAuthenticated={setAuthenticated} />
+      <Switch>
+        <Route path="/login" exact={true}>
+          <LoginForm
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
+        </Route>
+        <Route path="/sign-up" exact={true}>
+          <SignUpForm
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
+        </Route>
+        <Route path="/locations/:id" exact={true}>
+          <Listing>
+            <SimpleMap />
+          </Listing>
+        </Route>
+        <Route path="/locations" exact={true}>
+          <Location />    
+        </Route>
 
-                <Route path="/">
-                    <Home />
-                    <SimpleMap />
-                </Route>
-                <ProtectedRoute
-                    path="/users"
-                    exact={true}
-                    authenticated={authenticated}
-                >
-                    <UsersList />
-                </ProtectedRoute>
-                <ProtectedRoute
-                    path="/users/:userId"
-                    exact={true}
-                    authenticated={authenticated}
-                >
-                    <User />
-                </ProtectedRoute>
-                <ProtectedRoute
-                    path="/"
-                    exact={true}
-                    authenticated={authenticated}
-                >
-                    <Home />
-                    <SimpleMap />
-                </ProtectedRoute>
-            </Switch>
-        </BrowserRouter>
-    );
+        <Route path="/">
+          <Home />
+          < SimpleMap />
+        </Route>
+        <ProtectedRoute
+          path="/users"
+          exact={true}
+          authenticated={authenticated}
+        >
+          <UsersList />
+        </ProtectedRoute>
+        <ProtectedRoute
+          path="/users/:userId"
+          exact={true}
+          authenticated={authenticated}
+        >
+          <User />
+        </ProtectedRoute>
+        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+          <Home />
+          <SimpleMap />
+        </ProtectedRoute>
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
