@@ -1,29 +1,25 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import {useSelector} from "react-redux"
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ lat, lng, text }) => <div>{
+<img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" alt="marker" width="50px" />
+}</div>;
+
 
 
 const SimpleMap = () => {
-  let latitude
-  let longitude
-  let searchCoords = useSelector(state => state.searchLocation)
-  if (!searchCoords){
-    latitude = 42
-    longitude = -116
-  } else {
-    latitude = searchCoords[0]
-    longitude = searchCoords[1]
-  }
-
-
+  const locationMarks = useSelector(state => state.locations.locationlist)
+ 
+  let latitude = useSelector(state => state.locations.searchLocation[0])
+  let longitude = useSelector(state => state.locations.searchLocation[1])
+ 
   let defaultProps = {
     center: {
       lat: latitude,
       lng: longitude
     },
-    zoom: 10
+    zoom: 13
   };
 
 
@@ -40,11 +36,24 @@ const SimpleMap = () => {
             defaultCenter={defaultProps.center}
             defaultZoom={defaultProps.zoom}
           >
-            <AnyReactComponent
-              lat={59.955413}
-              lng={-116.337844}
+            {/* <AnyReactComponent
+              lat={36.1699}
+              lng={-115.1398}
               text="My Marker"
-            />
+
+              /> */}
+              <div>
+              {locationMarks.map(location => (
+                <AnyReactComponent
+                  key={location.id} 
+                  lat={location.latitude}
+                  lng={location.longitude}
+                  text={location.title}
+                  
+                />
+              ))}
+              </div>
+              
           </GoogleMapReact>
         </div>
       </div>
