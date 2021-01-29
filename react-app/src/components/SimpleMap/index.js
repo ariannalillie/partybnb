@@ -3,8 +3,9 @@ import {useSelector} from "react-redux"
 import GoogleMapReact from 'google-map-react';
 
 const AnyReactComponent = ({ lat, lng, text }) => <div>{
-<img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" alt="marker" width="50px" draggable="true"/>
+<img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" alt="marker" width="50px" />
 }</div>;
+
 
 
 const SimpleMap = () => {
@@ -13,9 +14,6 @@ const SimpleMap = () => {
   let latitude = useSelector(state => state.locations.searchLocation[0])
   let longitude = useSelector(state => state.locations.searchLocation[1])
  
-const [newLatitude, setNewLatitude] = useState(latitude)
-const [newLongitude, setNewLongitude] = useState(longitude)
-
   let defaultProps = {
     center: {
       lat: latitude,
@@ -44,15 +42,17 @@ const [newLongitude, setNewLongitude] = useState(longitude)
               text="My Marker"
 
               /> */}
-              <>
+              <div>
               {locationMarks.map(location => (
-                <AnyReactComponent 
+                <AnyReactComponent
+                  key={location.id} 
                   lat={location.latitude}
                   lng={location.longitude}
                   text={location.title}
+                  
                 />
               ))}
-              </>
+              </div>
               
           </GoogleMapReact>
         </div>
