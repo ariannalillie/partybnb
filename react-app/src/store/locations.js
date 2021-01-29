@@ -73,10 +73,25 @@ export const searchLocations = (payload) => async (dispatch) => {
 
 export const createListing = (payload) => async dispatch => {
     const { title, description, venueType, amenities, maxGuests, bookingPrice, address, city, state, zipcode } = payload;
+   const res = await fetch(
+     `https://google-maps-geocoding.p.rapidapi.com/geocode/json?address=${zipcode}`,
+     {
+       method: "GET",
+       headers: {
+         "x-rapidapi-key": "20dde32ademsha97b6dc9dd8189bp1973e4jsnbc1294ead8c1",
+         "x-rapidapi-host": "google-maps-geocoding.p.rapidapi.com",
+       },
+     }
+   );
+   const googleZipcodeLatLng = await res.json()
+   let searchLat = await googleZipcodeLatLng.results[0].geometry.location.lat;
+   let searchLng = await googleZipcodeLatLng.results[0].geometry.location.lng;
+   let zipLat = await Math.floor(searchLat);
+   let zipLng = await Math.floor(searchLng);
     const response = await fetch(`/api/location/createlisting`, {
       method: 'POST',
       body: JSON.stringify({
-          title, description, venueType, amenities, maxGuests, bookingPrice, address, city, state, zipcode
+          title, description, venueType, amenities, maxGuests, bookingPrice, address, city, state, zipcode, latitude:{zipLat}, longitude:{zipLng}
       }),
     });
     if (response.ok) {
