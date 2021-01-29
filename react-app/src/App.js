@@ -39,9 +39,7 @@ function App() {
                     <LoginForm
                         authenticated={authenticated}
                         setAuthenticated={setAuthenticated}
-                    >
-                        <Home />
-                    </LoginForm>
+                    />
                 </Route>
                 <Route path="/sign-up" exact={true}>
                     <SignUpForm
