@@ -27,30 +27,27 @@ const Location = () => {
                 <CreateListing />
                 <Search />
                 <div>
-                {locationlist.map(location =>
-                <div class="eventspace-container">
-                 <h1><Link to={`/locations/${location.id}`}>{location.title}</Link></h1>
-                 <div>
-                    <img class="eventspacephoto" src={location.photos.photoUrl} alt="eventspace" />
-                    <p>Venue Type: {location.venueType}</p>
-                    <p>Max Guests: {location.maxGuests}</p>
-                    <p>Description: {location.description}</p>
-                    <p>Amenities: {location.amenities}</p>
-                    <p>Booking Price: {location.bookingPrice}</p>
-                    <p>Address: {location.address}, {location.city}, {location.state} {location.zipcode}</p>
-                </div>
-                <div class="map">
-            <SimpleMap />
-          </div>
+                  {locationlist.map(location =>
+                  <div className="eventspace-outside">
+                    <div className="eventspace-container">
+                      <h1><Link to={`/locations/${location.id}`}>{location.title}</Link></h1>
+                      <div>
+                        <img class="eventspacephoto" src={location.photos.photoUrl} alt="eventspace" />
+                        <p>Venue Type: {location.venueType}</p>
+                        <p>Max Guests: {location.maxGuests}</p>
+                        <p>Description: {location.description}</p>
+                        <p>Amenities: {location.amenities}</p>
+                        <p>Booking Price: {location.bookingPrice}</p>
+                        <p>Address: {location.address}, {location.city}, {location.state} {location.zipcode}</p>
+                      </div>
+                    </div>
+                    <div className="map">
+                      <SimpleMap />
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-
-          </div>
-          <div>
-          </div>
-
-        </div>
-
+         </div>
     );
 }
 
