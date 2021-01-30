@@ -31,7 +31,7 @@ const Location = () => {
                 <div class="eventspace-container">
                  <h1><Link to={`/locations/${location.id}`}>{location.title}</Link></h1>
                  <div>
-                    <img class="eventspacephoto" src={location.photos.photoUrl} alt="eventspace" />
+                    {location.photos.photoUrl ? <img className="eventspacephoto" src={location.photos.photoUrl} alt="eventspace" /> : <img className="eventspacephoto" src={"https://pronto-core-cdn.prontomarketing.com/119/wp-content/uploads/2016/12/Purple-Rain-Photo-1-1.jpg"}/>}
                     <p>Venue Type: {location.venueType}</p>
                     <p>Max Guests: {location.maxGuests}</p>
                     <p>Description: {location.description}</p>
@@ -39,11 +39,12 @@ const Location = () => {
                     <p>Booking Price: {location.bookingPrice}</p>
                     <p>Address: {location.address}, {location.city}, {location.state} {location.zipcode}</p>
                 </div>
-                <div class="map">
-            <SimpleMap />
+                <div className="map">
           </div>
               </div>
             )}
+            <div>{locationlist.length ? <SimpleMap /> : <div></div>}
+            </div>
 
           </div>
           <div>
