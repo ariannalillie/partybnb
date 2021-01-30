@@ -17,3 +17,18 @@ body {
     padding-right: 200px;
     padding-left: 20px;
 }
+
+.eventspace-outside {
+    width: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.map {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    right: 100px;
+}
