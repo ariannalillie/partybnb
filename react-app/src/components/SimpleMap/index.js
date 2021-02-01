@@ -72,9 +72,9 @@ const SimpleMap = () => {
                     lng={spotMark.longitude}
                   ></PinContainer>
                 ))}
-                
+
             </GoogleMapReact>
-          
+
         </Map>
       </MapContainer>
     </MapComponentContainer>
