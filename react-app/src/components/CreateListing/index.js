@@ -67,7 +67,7 @@ const CreateListing = () => {
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Creat a listing</DialogTitle>
+                <DialogTitle id="form-dialog-title">Create an Eventspace</DialogTitle>
                 <DialogContent>
 
                     <form onSubmit={handleSubmit}>

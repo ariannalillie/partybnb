@@ -53,7 +53,7 @@ const SimpleMap = () => {
 
   return (
     <MapComponentContainer>
-      <Header>LOCATION</Header>
+      <Header></Header>
       <MapContainer>
         <Map>
             <GoogleMapReact
@@ -64,7 +64,7 @@ const SimpleMap = () => {
                 lat: latitude,
                 lng: longitude,
               }}
-              defaultZoom={13}
+              defaultZoom={5}
             >
                 {locationMarks.map(spotMark=> (
                   <PinContainer
